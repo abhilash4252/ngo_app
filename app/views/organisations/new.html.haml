@@ -1,0 +1,10 @@
+%h1 New Organisation
+
+.row
+  .col-md-6
+    =form_for(@organisation) do |f|
+      =f.label :name
+      =f.text_field :name
+
+      =f.submit "Create Organisation"
+

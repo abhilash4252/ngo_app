@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  root 'users#index'
+  resources :users
+  resources :organisations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -26,10 +30,10 @@ Rails.application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  #     resources :comments, :sales
 
   # Example resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
   #     resource :seller
   #   end
 
