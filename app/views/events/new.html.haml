@@ -1,0 +1,16 @@
+-if flash[:alert]
+  .alert
+    =flash[:alert]
+%h1 New Event
+
+.row
+  .col-md-6
+    =form_for [current_user,@current_organisation, @event] do |f|
+      =f.label :name
+      =f.text_field :name
+      =f.label :location
+      =f.text_field :location
+      =f.label :date
+      =f.date_field :date
+      =f.submit "Create Event"
+

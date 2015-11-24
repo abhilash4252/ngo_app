@@ -1,0 +1,8 @@
+-if flash[:notice]
+  =flash[:notice]
+.events
+  =@event.name
+  =@event.date
+  =@event.location
+  =link_to "Delete Event"
+  %br/

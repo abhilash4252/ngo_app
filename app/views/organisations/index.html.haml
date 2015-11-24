@@ -1,7 +1,7 @@
 %h1 My Organisations
 .organisations
   -@organisations.each do |organisation|
-    =organisation.name
-    =link_to "delete", organisation, method: :delete, data: { confirm: "R you sure ?" }
+    = link_to organisation.name, user_organisation_path(current_user, organisation)
+    = link_to "delete", user_organisation_path(current_user, organisation), method: :delete, data: { confirm: "R you sure ?" }
     %br/
     %br/

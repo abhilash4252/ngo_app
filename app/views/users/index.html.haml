@@ -3,7 +3,7 @@
     %strong= current_user.firstname
     %strong= current_user.lastname
 
-  =link_to "Create Organisation", new_organisation_path
+  =link_to "Create Organisation", new_user_organisation_path(current_user)
 -else
   %h3 All events
   %p Coming soon
