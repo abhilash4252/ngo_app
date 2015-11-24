@@ -1,0 +1,7 @@
+%h1 My Organisations
+.organisations
+  -@organisations.each do |organisation|
+    =organisation.name
+    =link_to "delete", organisation, method: :delete, data: { confirm: "R you sure ?" }
+    %br/
+    %br/

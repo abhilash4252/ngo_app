@@ -1,5 +1,9 @@
-.row
-  %strong= current_user.firstname
-  %strong= current_user.lastname
+-if user_signed_in?
+  .row
+    %strong= current_user.firstname
+    %strong= current_user.lastname
 
-=link_to "Create Organisation", new_organisation_path
+  =link_to "Create Organisation", new_organisation_path
+-else
+  %h3 All events
+  %p Coming soon
