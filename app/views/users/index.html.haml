@@ -16,7 +16,18 @@
         created by
         =event.organisation.name
         -if event.organisation.user.id != current_user.id
-          =link_to "Participate" 
+          =link_to "Participate", participations_path(event_id: event.id), method: :post 
+  %h2 Upcoming Events
+  .row
+    -@participating.each do |p|
+      %p
+        =p.name
+        at
+        =p.location
+        on
+        =p.date
+        created by
+        =p.organisation.name
 
 -else
   %h3 All events
