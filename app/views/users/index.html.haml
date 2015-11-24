@@ -4,6 +4,20 @@
     %strong= current_user.lastname
 
   =link_to "Create Organisation", new_user_organisation_path(current_user)
+  %h3 All events
+  .row
+    -@allevents.each do |event|
+      %p
+        =event.name
+        at
+        =event.location
+        on
+        =event.date
+        created by
+        =event.organisation.name
+        -if event.organisation.user.id != current_user.id
+          =link_to "Participate" 
+
 -else
   %h3 All events
   %p Coming soon
