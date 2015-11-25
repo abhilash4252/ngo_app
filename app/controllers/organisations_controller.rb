@@ -4,7 +4,7 @@ class OrganisationsController < ApplicationController
   end
 
   def new
-    @organisation = current_user.organisations.new
+    @organisation = Organisation.new
   end
 
   def show

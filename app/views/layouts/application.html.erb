@@ -7,14 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if user_signed_in? %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to 'Edit profile', edit_user_registration_path %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign up',new_user_registration_path %>
-  <%= link_to 'Login', new_user_session_path %>
-<% end %>
+  <nav class = "navbar navbar-default">
+    <div class ="container-fluid">
+      <div class="navbar-header home">
+        <%=link_to "Home",root_path %>
+      </div>
+      <div class="collapse navbar-collapse" >
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li class="dropdown">
+            <%=link_to 'My Organisations <span class="caret"></span>'.html_safe,user_organisations_path(current_user), class: "dropdown-toggle", :'data-toggle' => 'dropdown', :id => 'drop', :'role' => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false"%>
+            <ul class="dropdown-menu">
+              <%- current_user.organisations.each do |org| %>
+                <li><%=link_to org.name, user_organisation_path(current_user,org) %></li>
+              <% end %>
+              </ul>
+            </li>
+            <li class="dropdown">
+            <%=link_to 'My Account <span class="caret"></span>'.html_safe,"#", class: "dropdown-toggle", :'data-toggle' => 'dropdown', :id => 'drop1', :'role' => "button", :'aria-haspopup' => "true", :'aria-expanded' => "false"%>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Edit profile', edit_user_registration_path %>
+                </li>
+                <li>
+                 <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 <%= yield %>
 
