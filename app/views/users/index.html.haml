@@ -28,7 +28,16 @@
         =p.date
         created by
         =p.organisation.name
+  %h2 My Events
+  .row
+    -@myevents.each do |m|
+      =link_to m.name,user_organisation_event_path(current_user.id,m.organisation_id,m.id)
+      at
+      =m.location
+      on
+      =m.date
+      %br/
 
 -else
   %h3 All events
-  %p Coming soon
+  %p= link_to "Login to see Events",new_user_session_path

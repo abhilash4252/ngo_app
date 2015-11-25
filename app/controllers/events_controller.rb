@@ -10,6 +10,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @participants = Participation.where(event_id: @event.id)
+    @participants = User.where(id: @participants.collect { |u| u.user_id })
     if @event.organisation_id != @current_organisation.id
       redirect_to user_organisations_events_url
     end
