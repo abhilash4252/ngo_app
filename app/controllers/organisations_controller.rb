@@ -1,10 +1,15 @@
 class OrganisationsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @organisations = current_user.organisations
   end
 
   def new
-    @organisation = Organisation.new
+    if params[:user_id] == current_user.id.to_s 
+      @organisation = Organisation.new
+    else
+      redirect_to new_user_organisation_path(current_user)
+    end
   end
 
   def show

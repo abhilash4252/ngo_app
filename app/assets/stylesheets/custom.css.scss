@@ -5,4 +5,26 @@
   font-weight:bold;
   margin-top:7px;
 }
+input, textarea,selcet, .uneditable-input {
+  border: 1px solid #bbb;
+  width:100%;
+  margin-bottom:15px;
+}
+input {
+  height: auto !important;
+}
 
+.create {
+  margin-left:15px;
+}
+#user_remember_me {
+  width:auto !important;
+}
+.organisations tr {
+    height:55px;
+}
+
+
+.organisations td {
+  padding-left:20px;
+}

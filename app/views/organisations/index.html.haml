@@ -1,7 +1,9 @@
 %h1 My Organisations
 .organisations
-  -@organisations.each do |organisation|
-    = link_to organisation.name, user_organisation_path(current_user, organisation)
-    = link_to "delete", user_organisation_path(current_user, organisation), method: :delete, data: { confirm: "R you sure ?" }
-    %br/
-    %br/
+  %table
+    -@organisations.each do |organisation|
+      %tr
+        %td
+          = link_to organisation.name, user_organisation_path(current_user, organisation)
+        %td
+          %a.btn.btn-primary.btn-sm{:href => user_organisation_path(current_user, organisation), method: :delete, data: { confirm: "R you sure ?" } }Delete Organisation

@@ -1,11 +1,33 @@
 -if user_signed_in?
-  .row
-    %strong= current_user.firstname
-    %strong= current_user.lastname
+  .container-fluid
+    %strong.lead= current_user.firstname.capitalize
+    %strong.lead= current_user.lastname.capitalize
 
-  =link_to "Create Organisation", new_user_organisation_path(current_user)
-  %h3 All events
-  .row
+    %a.btn.btn-primary.pull-right{:href =>  new_user_organisation_path(current_user), :role => "button" } Create Organisation
+  .container-fluid 
+    %h2 Participating Events:
+    -@participating.each do |p|
+      %p
+        =p.name
+        at
+        =p.location
+        on
+        =p.date
+        created by
+        =p.organisation.name
+  
+  .container-fluid
+    %h2 Created Events:
+    -@myevents.each do |m|
+      =link_to m.name,user_organisation_event_path(current_user.id,m.organisation_id,m.id)
+      at
+      =m.location
+      on
+      =m.date
+      %br/
+  
+  .container-fluid
+    %h2 All events:
     -@allevents.each do |event|
       %p
         =event.name
@@ -17,27 +39,5 @@
         =event.organisation.name
         -if event.organisation.user.id != current_user.id
           =link_to "Participate", participations_path(event_id: event.id), method: :post 
-  %h2 Upcoming Events
-  .row
-    -@participating.each do |p|
-      %p
-        =p.name
-        at
-        =p.location
-        on
-        =p.date
-        created by
-        =p.organisation.name
-  %h2 My Events
-  .row
-    -@myevents.each do |m|
-      =link_to m.name,user_organisation_event_path(current_user.id,m.organisation_id,m.id)
-      at
-      =m.location
-      on
-      =m.date
-      %br/
-
 -else
-  %h3 All events
-  %p= link_to "Login to see Events",new_user_session_path
+  %a.btn.btn-primary{:href=>new_user_session_path } Login

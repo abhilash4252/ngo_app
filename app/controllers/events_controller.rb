@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   before_action :current_organisation
   def index
     @events = @current_organisation.events
@@ -10,8 +11,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @participants = Participation.where(event_id: @event.id)
-    @participants = User.where(id: @participants.collect { |u| u.user_id })
+    @participants = @event.participants
     if @event.organisation_id != @current_organisation.id
       redirect_to user_organisations_events_url
     end
@@ -38,6 +38,11 @@ class EventsController < ApplicationController
       params.require(:event).permit(:name,:date,:location)
     end
     def current_organisation
-      @current_organisation = Organisation.find(params[:organisation_id])
+      
+      if  current_user.organisations.ids.include? (params[:organisation_id]).to_i
+        @current_organisation = Organisation.find(params[:organisation_id])
+      else
+        redirect_to root_path
+      end
     end
 end
