@@ -4,18 +4,18 @@
     %strong.lead= current_user.lastname.capitalize
 
     %a.btn.btn-primary.pull-right{:href =>  new_user_organisation_path(current_user), :role => "button" } Create Organisation
-  .container-fluid 
+  .container-fluid
     %h2 Participating Events:
     -@participating.each do |p|
       %p
-        =p.name
+        =link_to p.name, participation_path(p)
         at
         =p.location
         on
         =p.date
         created by
         =p.organisation.name
-  
+
   .container-fluid
     %h2 Created Events:
     -@myevents.each do |m|
@@ -25,12 +25,12 @@
       on
       =m.date
       %br/
-  
+
   .container-fluid
     %h2 All events:
     -@allevents.each do |event|
       %p
-        =event.name
+        =link_to event.name, participation_path(event)
         at
         =event.location
         on

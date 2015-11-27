@@ -1,0 +1,7 @@
+.container-fluid
+  %h2 Participating Events:
+  -@participating.each do |p|
+    %p
+      =link_to p.name, participation_path(p)
+      at
+      =p.location

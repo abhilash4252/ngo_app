@@ -3,3 +3,7 @@
 .organisations
   =@organisation.name
   %a.btn.btn-primary.pull-right{:href => new_user_organisation_event_path(current_user, @organisation) } Create Event
+.container
+  -@organisation.events.each do |event|
+    =event.name
+

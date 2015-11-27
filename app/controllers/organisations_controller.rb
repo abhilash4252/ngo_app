@@ -27,7 +27,7 @@ class OrganisationsController < ApplicationController
       #redirect_to [current_user,@orgnisation]
       redirect_to user_organisation_path(current_user, @organisation)
     else
-      flash[:alert] = "Orgainisatio creation failed"
+      flash[:alert] = "Orgainisation creation failed"
       render :new
     end
   end

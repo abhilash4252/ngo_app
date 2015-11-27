@@ -1,0 +1,19 @@
+.container
+  %b Event:
+  =@event.name
+  %br/
+  %b Location:
+  =@event.location
+  %br/
+  %b Date:
+  =@event.date
+  %br/
+  %b Organisation:
+  =@event.organisation.name
+  %br/
+  -if @participating.ids.include? @event.id
+    =link_to "Unparticipate", participation_path(),method: :delete, data: { confirm: "R u sure ?"} ,class: "btn btn-danger"
+  -else
+    =link_to "Participate", participations_path(event_id: @event.id), method: :post, class: "btn btn-primary" 
+
+
