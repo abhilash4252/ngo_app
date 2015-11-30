@@ -1,43 +1,86 @@
 -if user_signed_in?
-  .container-fluid
-    %strong.lead= current_user.firstname.capitalize
-    %strong.lead= current_user.lastname.capitalize
+  .container.marginBottom5px
+    %strong.head= current_user.firstname.capitalize
+    %strong.head= current_user.lastname.capitalize
 
     %a.btn.btn-primary.pull-right{:href =>  new_user_organisation_path(current_user), :role => "button" } Create Organisation
-  .container-fluid
-    %h2 Participating Events:
-    -@participating.each do |p|
-      %p
-        =link_to p.name, participation_path(p)
-        at
-        =p.location
-        on
-        =p.date
-        created by
-        =p.organisation.name
+  .container.upcoming
+    -if @participating_events.count > 0
+      %b.head Participating Events:
+      %div.row
+        -if @upcoming_participating_events.count > 0
+          %div.col-md-6
+            %b Upcoming Events:
+            -@upcoming_participating_events.each do |p|
+              %p
+                =link_to p.name, participation_path(p)
+                at
+                =p.location
+                on
+                =p.date
+                created by
+                =p.organisation.name
+        -if @past_participating_events.count > 0
+          %div.col-md-6
+            %b Finished Events:
+            -@past_particiating_events.each do |p|
+              %p
+                =p.name 
+                by
+                =p.organisation.name
 
-  .container-fluid
-    %h2 Created Events:
-    -@myevents.each do |m|
-      =link_to m.name,user_organisation_event_path(current_user.id,m.organisation_id,m.id)
-      at
-      =m.location
-      on
-      =m.date
-      %br/
 
-  .container-fluid
-    %h2 All events:
-    -@allevents.each do |event|
-      %p
-        =link_to event.name, participation_path(event)
-        at
-        =event.location
-        on
-        =event.date
-        created by
-        =event.organisation.name
-        -if event.organisation.user.id != current_user.id
-          =link_to "Participate", participations_path(event_id: event.id), method: :post 
+  .container.upcoming
+    -if @created_events.count > 0 
+      %b.head My Events:
+      %div.row
+        -if @upcoming_created_events.count > 0
+          %div.col-md-6
+            %b Upcoming Events:
+            -@upcoming_created_events.each do |m|
+              %p
+                =link_to m.name,user_organisation_event_path(current_user.id,m.organisation_id,m.id)
+                at
+                =m.location
+                on
+                =m.date
+        -if @finished_created_events.count > 0
+          %div.col-md-6
+            %b Finished Events:
+            -@finished_created_events.each do |m|
+              %p
+                =m.name
+                on
+                m.date
+                by
+                m.organisation.name
+  .container.upcoming
+    -if @other_events.count > 0 
+      %b.head My Events:
+      %div.row
+        -if @upcoming_other_events.count > 0
+          %div.col-md-6
+            %b Upcoming Events:
+            -@upcoming_other_events.each do |m|
+              %p
+                =link_to m.name,participation_path(m)
+                at
+                =m.location
+                on
+                =m.date
+                =link_to "Participate", participations_path(event_id: m.id), method: :post,class: "btn btn-primary participate" 
+
+        -if @finished_other_events.count > 0
+          %div.col-md-6
+            %b Finished Events:
+            -@finished_other_events.each do |m|
+              %p
+                =m.name
+                on
+                m.date
+                by
+                m.organisation.name
+
+
 -else
   %a.btn.btn-primary{:href=>new_user_session_path } Login

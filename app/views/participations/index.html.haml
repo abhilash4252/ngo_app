@@ -1,7 +1,27 @@
-.container-fluid
-  %h2 Participating Events:
-  -@participating.each do |p|
-    %p
-      =link_to p.name, participation_path(p)
-      at
-      =p.location
+.container.upcoming
+  -if @participating_events.count > 0
+    %b.head Participating Events:
+    %div.row
+      -if @upcoming_participating_events.count > 0
+        %div.col-md-6
+          %b Upcoming Events:
+          -@upcoming_participating_events.each do |p|
+            %p
+              =link_to p.name, participation_path(p)
+              at
+              =p.location
+              on
+              =p.date
+              created by
+              =p.organisation.name
+      -if @past_participating_events.count > 0
+        %div.col-md-6
+          %b Finished Events:
+          -@past_participating_events.each do |p|
+            %p
+              =p.name 
+              by
+              =p.organisation.name
+
+
+
