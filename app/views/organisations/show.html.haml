@@ -1,9 +1,11 @@
 -if flash[:notice]
   =flash[:notice]
-.organisations
-  =@organisation.name
-  %a.btn.btn-primary.pull-right{:href => new_user_organisation_event_path(current_user, @organisation) } Create Event
 .container
+  %b.head
+    =@organisation.name
+  %a.btn.btn-primary.pull-right{:href => new_user_organisation_event_path(current_user, @organisation) } Create Event
+%ol.container
   -@organisation.events.each do |event|
-    =event.name
+    %li
+      =link_to event.name,user_organisation_event_path(current_user,@organisation,event.id)
 

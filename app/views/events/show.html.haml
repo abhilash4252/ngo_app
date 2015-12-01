@@ -1,17 +1,25 @@
--if flash[:notice]
-  =flash[:notice]
-.events
+.container
+  %b Event:
   =@event.name
-  =@event.date
+  %br/
+  %b Location:
   =@event.location
-  =link_to "Delete Event",user_organisation_event_path,method: :delete
+  %br/
+  %b Date:
+  =@event.date
+  %br/
+  %b Organisation:
+  =@event.organisation.name
+  %br/
+  =link_to "Delete Event",user_organisation_event_path,method: :delete,class: "btn btn-danger"
   %br/
 .participants
-  %h2 Participants
-  -@participants.each do |p|
-    Name:
-    =p.firstname + p.lastname
-    %br/
-    Email:
-    =p.email
-    %br/
+  %b.head Participants
+  %ol
+    -@participants.each do |p|
+      %li
+        %strong Name: 
+        #{p.firstname} #{p.lastname}
+        %strong Email: 
+        #{p.email}
+    

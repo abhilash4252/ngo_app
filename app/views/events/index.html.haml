@@ -1,7 +1,8 @@
 %h1 My Events
-.events
+%ol.events
   -@events.each do |event|
-    = link_to event.name, user_organisation_event_path(current_user,@current_organisation, event)
-    = link_to "delete", user_organisation_event_path(current_user, @current_organisation, event), method: :delete, data: { confirm: "R you sure ?" }
-    %br/
-    %br/
+    %li
+      = link_to event.name, user_organisation_event_path(current_user,@current_organisation, event)
+      
+    
+    

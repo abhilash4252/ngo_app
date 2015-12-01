@@ -22,8 +22,8 @@
                 =p.organisation.name
         -if @past_participating_events.count > 0
           %div.col-md-6
-            %b Finished Events:
-            -@past_particiating_events.each do |p|
+            %b Past Events:
+            -@past_participating_events.each do |p|
               %p
                 =p.name 
                 by
@@ -51,12 +51,12 @@
               %p
                 =m.name
                 on
-                m.date
+                =m.date
                 by
-                m.organisation.name
+                =m.organisation.name
   .container.upcoming
     -if @other_events.count > 0 
-      %b.head My Events:
+      %b.head All Events:
       %div.row
         -if @upcoming_other_events.count > 0
           %div.col-md-6
@@ -77,9 +77,9 @@
               %p
                 =m.name
                 on
-                m.date
+                =m.date
                 by
-                m.organisation.name
+                =m.organisation.name
 
 
 -else
